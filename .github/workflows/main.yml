@@ -24,23 +24,18 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Source Dir
-      run: |
-        cd ./src
-        ls
-
     # Runs a single command using the runners shell
     - name: Run Docker Compose Services
-      run: docker-compose up
-
-    - name: Testing Dir
-      run: cd ../testing
+      run: |
+        cd ./src 
+        docker-compose up
 
     # Runs a set of commands using the runners shell
     - name: Run Node Commands
       uses: actions/setup-node@v1
       with:
         node-version: 12
+    - run: cd testing
     - run: npm install
     - run: npm test
       
