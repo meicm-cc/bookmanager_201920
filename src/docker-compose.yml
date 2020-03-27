@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  database:
+    image: mongo
+  application:
+    image: bookmanager_app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/var/app/backend
+      - ./frontend:/var/app/frontend
+    ports:
+      - "8080:10000"
+    depends_on: 
+      - "database"
+    environment:
+      - GR_KEY=5rdbqi8sOiUoyOpofYvxLA
+
+# docker-compose up --build

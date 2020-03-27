@@ -1,10 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
 
+
+
 // Connection URL
-const url = `mongodb://localhost:27017/bookmanager`;
+const url = `mongodb://database:27017/bookmanager`;
 
 const dbName = 'bookmanager';
-
 
 const connect = () => {
   return new Promise((resolve,reject)=>{
