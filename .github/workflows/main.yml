@@ -28,7 +28,7 @@ jobs:
     - name: Run Docker Compose Services
       run: |
         cd ./src 
-        docker-compose up
+        docker-compose up -d
 
     # Runs a set of commands using the runners shell
     - name: Run Node Commands
