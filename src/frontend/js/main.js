@@ -1,3 +1,7 @@
+const historyServiceURL = ''
+const searchServiceURL = ''
+
+
 const insertSearchResult = (book,table) => {
   let row = document.createElement('tr');
   let year = document.createElement('td');
@@ -56,7 +60,7 @@ const searchListener = (e) => {
   e.preventDefault();
   let searchTerms = document.querySelector("#search").value;
   
-  axios.post('/api/search',{search:searchTerms})
+  axios.post(searchServiceURL+'/api/search',{search:searchTerms})
   .then(response => {
     console.log(response.data);
     let table = document.querySelector('#search_results');
@@ -73,7 +77,7 @@ const searchListener = (e) => {
 }
 
 const populateHistory = async () => {
-  let historyResults = await axios.get('/api/history');
+  let historyResults = await axios.get(historyServiceURL+'/api/history');
   if(historyResults){
     let tableResults = document.querySelector('#history_table');
     let tableSearch = document.querySelector('#search_results');
