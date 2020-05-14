@@ -27,7 +27,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run Docker Compose Services
       run: |
-        cd ./src 
+        cd ./src
         docker-compose up -d
 
     # Runs a set of commands using the runners shell
@@ -38,5 +38,5 @@ jobs:
     - run: | 
         cd testing
         npm install
-        npm test
+        npm  test
       
