@@ -1,7 +1,6 @@
 const historyServiceURL = ''
 const searchServiceURL = ''
 
-
 const insertSearchResult = (book,table) => {
   let row = document.createElement('tr');
   let year = document.createElement('td');
@@ -54,8 +53,6 @@ const insertHistoryResult = (result, tableResults, tableSearch) => {
   tbodyResults.appendChild(row);
 }
 
-
-
 const searchListener = (e) => {
   e.preventDefault();
   let searchTerms = document.querySelector("#search").value;
@@ -86,7 +83,6 @@ const populateHistory = async () => {
     }
   }
 }
-
 
 (()=>{
   console.log("JS Loaded");
