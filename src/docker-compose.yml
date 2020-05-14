@@ -3,19 +3,39 @@ version: "3"
 services:
   database:
     image: mongo
-  application:
-    image: bookmanager_app
+  frontend:
+    image: bookmanager_frontend:1.0.0
     build:
-      context: ./
+      context: ./frontend
       dockerfile: Dockerfile
-    volumes:
-      - ./backend:/var/app/backend
-      - ./frontend:/var/app/frontend
+    ports:
+      - "8081:80"
+  history_service:
+    image: bookmanager_history_service:1.0.0
+    build:
+      context: ./services/history
+      dockerfile: Dockerfile
     ports:
       - "10000:10000"
     depends_on: 
       - "database"
     environment:
+      - SERVICE_PORT=10000
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
+  search_service:
+    image: bookmanager_search_service:1.0.0
+    build:
+      context: ./services/search
+      dockerfile: Dockerfile
+    ports:
+      - "10001:10001"
+    depends_on: 
+      - "database"
+    environment:
       - GR_KEY=5rdbqi8sOiUoyOpofYvxLA
-
-# docker-compose up --build
+      - SERVICE_PORT=10001
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
