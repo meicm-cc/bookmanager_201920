@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-search
+  labels:
+    project: meicm-bm
+    name: bookmanager-search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-search
+  template:
+    metadata:
+      labels:
+        project: meicm-bm
+        name: bookmanager-search
+    spec:
+      containers:
+      - name: bookmanager-search
+        env:
+        - name: GR_KEY
+          value: 5rdbqi8sOiUoyOpofYvxLA
+        - name: SERVICE_DB_HOSTNAME
+          value: bookmanager-database
+        - name: SERVICE_DB_NAME
+          value: bookmanager
+        - name: SERVICE_DB_PORT
+          value: "27017"
+        - name: SERVICE_PORT
+          value: "10001"
+        ports:
+        - containerPort: 10001
+        image: bookmanager_search_service:1.0.0
+        imagePullPolicy: Never
+        resources: {}
+      restartPolicy: Always
+      
