@@ -1,5 +1,8 @@
 const historyServiceURL = ''
 const searchServiceURL = ''
+const authenticationServiceURL = ''
+const trackingServiceURL = ''
+const statisticsServiceURL = ''
 
 const insertSearchResult = (book,table) => {
   let row = document.createElement('tr');
@@ -20,8 +23,28 @@ const insertSearchResult = (book,table) => {
   img.src = book.thumbnail_url;
   cover.appendChild(img)
   row.appendChild(cover);
+
+  if(sessionStorage.getItem('token')){
+    let trackTD = document.createElement('td');
+    let trackButton = document.createElement('button');
+    trackButton.innerHTML = 'Track';
+    trackButton.classList.add('btn');
+    trackButton.classList.add('btn-primary');
+    trackButton.addEventListener('click',async (e)=>{
+      e.preventDefault();
+      const result = await axios.post(trackingServiceURL+'/api/books',book);
+      console.log(result.data);
+      if(result.status == 200) {
+        alert("Book tracked");
+      }
+    })
+    trackTD.appendChild(trackButton);
+    row.appendChild(trackTD);
+  }
+
   table.appendChild(row);
 }
+
 
 const insertHistoryResult = (result, tableResults, tableSearch) => {
   let tbodyResults = tableResults.querySelector('tbody');
@@ -84,9 +107,27 @@ const populateHistory = async () => {
   }
 }
 
+const loginListener = (e) => {
+  e.preventDefault();
+  let data = {
+    username: document.querySelector('#username').value,
+    password: document.querySelector('#password').value
+  }
+  axios.post(authenticationServiceURL+'/api/signin',data)
+    .then(response=>{
+      sessionStorage.setItem('token',response.data.token);
+      location.reload(false);
+    }).catch(error=>{console.log(error)});
+}
+
 (()=>{
   console.log("JS Loaded");
  
+  let token = sessionStorage.getItem('token');
+  if(token){
+    axios.defaults.headers.common['Authorization'] = 'bearer '+ token;
+  }
+
   let search_form = document.querySelector("#search_form");
   if(search_form){
     search_form.addEventListener('submit',searchListener);
@@ -95,6 +136,24 @@ const populateHistory = async () => {
   let history_results = document.querySelector('#history_table');
   if(history_results){
     populateHistory();
+  }
+
+  let loginForm = document.querySelector("form#login");
+  let logoutForm = document.querySelector('form#logout');
+  if(loginForm){
+    let token = sessionStorage.getItem('token');
+    if(token){
+      loginForm.style.display = 'none';
+      logoutForm.style.display = 'block';
+    } else {
+      logoutForm.style.display = 'none';
+      loginForm.style.display = 'block';
+    }
+    loginForm.addEventListener('submit',loginListener);
+    logoutForm.addEventListener('submit',(e)=>{
+      sessionStorage.removeItem('token');
+      location.reload(false);
+    });
   }
 
 })();

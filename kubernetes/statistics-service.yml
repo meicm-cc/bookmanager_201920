@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  bookmanager-statistics
+  labels:
+    name: bookmanager-statistics
+spec:
+  selector:
+    name: bookmanager-statistics
+  type:  NodePort
+  ports:
+  - port:  10005
+    targetPort:  10005

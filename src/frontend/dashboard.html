@@ -26,15 +26,59 @@
           <li class="nav-item">
             <a class="nav-link" href="dashboard.html">Data Dashboard</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="auth.html">Auth</a>
+          </li>
         </ul>
       </div>
     </nav>
+    <div id="content" class="dashboard container">
+      <div class="box books">
+        <h2>Tracked Books</h2>
+        <div></div>
+      </div>
+      <div class="box growth">
+        <h2>Growth</h2>
+        <div>Day: <span></span>%</div>
+        <div>Week: <span></span>%</div>
+        <div>Month: <span></span>%</div>
+      </div>
+      <div class="box total_chart">
+        <canvas id="total_chart"></canvas>
+      </div>
+      <div class="box ratings">
+        <canvas id="ratings-chart"></canvas>
+      </div>
+      <div class="box book_list">
+        <h2>Tracked Books</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Cover</td>
+              <td>Title</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+          <tbody>
 
+          </tbody>
+        </table>
+      </div>
+      <div class="box publishers">
+        <h2>Publishers</h2>
+        <canvas id="publishers-pie"></canvas>
+      </div>
+    </div>
+    <form>
+      <button id="trigger">Trigger</button>
+    </form>
 
     </div>
     <script src="/vendor/jquery/jquery-3.5.1.slim.min.js" ></script>
     <script src="/vendor/bootstrap-4.5.0-dist/js/bootstrap.min.js" ></script>
     <script src="/vendor/axios/axios.min.js" ></script>
-    <script src="js/main.js"> </script>
+    <script src="/vendor/moment/moment.min.js" ></script>
+    <script src="/vendor/charts/chart.min.js" ></script>
+    <script src="js/dashboard.js"> </script>
   </body>
 </html>

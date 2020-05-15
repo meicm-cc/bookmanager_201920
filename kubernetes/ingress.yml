@@ -10,14 +10,30 @@ spec:
     - host: bookmanager.meicm
       http:
         paths:
-          - path: /(api/search)(.*)
-            backend:
-              serviceName: bookmanager-search
-              servicePort: 10001
           - path: /(api/history)(.*)
             backend:
               serviceName: bookmanager-history
               servicePort: 10000
+          - path: /(api/search)(.*)
+            backend:
+              serviceName: bookmanager-search
+              servicePort: 10001
+          - path: /(api/signin)(.*)
+            backend:
+              serviceName: bookmanager-authentication
+              servicePort: 10002
+          - path: /(api/books)(.*)
+            backend:
+              serviceName: bookmanager-tracking
+              servicePort: 10003
+          - path: /(api/trigger)(.*)
+            backend:
+              serviceName: bookmanager-data-gatherer
+              servicePort: 10004
+          - path: /(api/statistics)(.*)
+            backend:
+              serviceName: bookmanager-statistics
+              servicePort: 10005
           - path: /()(.*)
             backend:
               serviceName: bookmanager-frontend

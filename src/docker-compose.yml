@@ -30,12 +30,69 @@ services:
       context: ./services/search
       dockerfile: Dockerfile
     ports:
-      - "10001:10001"
+      - "10001:10000"
     depends_on: 
       - "database"
     environment:
       - GR_KEY=5rdbqi8sOiUoyOpofYvxLA
-      - SERVICE_PORT=10001
+      - SERVICE_PORT=10000
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
+  authentication_service:
+    image: bookmanager_authentication_service:1.0.0
+    build:
+      context: ./services/authentication
+      dockerfile: Dockerfile
+    ports:
+      - "10002:10000"
+    depends_on: 
+      - "database"
+    environment:
+      - SERVICE_PORT=10000
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
+  tracking_service:
+    image: bookmanager_tracking_service:1.0.0
+    build:
+      context: ./services/tracking
+      dockerfile: Dockerfile
+    ports:
+      - "10003:10000"
+    depends_on: 
+      - "database"
+    environment:
+      - SERVICE_PORT=10000
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
+  data_gatherer_service:
+    image: bookmanager_data_gatherer_service:1.0.0
+    build:
+      context: ./services/data_gatherer
+      dockerfile: Dockerfile
+    ports:
+      - "10004:10000"
+    depends_on: 
+      - "database"
+    environment:
+      - SERVICE_PORT=10000
+      - SERVICE_DB_HOSTNAME=database
+      - SERVICE_DB_PORT=27017
+      - SERVICE_DB_NAME=bookmanager
+      - GR_KEY=5rdbqi8sOiUoyOpofYvxLA
+  statistics_service:
+    image: bookmanager_statistics_service:1.0.0
+    build:
+      context: ./services/statistics
+      dockerfile: Dockerfile
+    ports:
+      - "10005:10000"
+    depends_on: 
+      - "database"
+    environment:
+      - SERVICE_PORT=10000
       - SERVICE_DB_HOSTNAME=database
       - SERVICE_DB_PORT=27017
       - SERVICE_DB_NAME=bookmanager

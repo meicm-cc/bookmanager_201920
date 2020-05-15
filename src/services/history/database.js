@@ -1,6 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
 
-// Connection URL
 const SERVICE_DB_HOSTNAME = process.env.SERVICE_DB_HOSTNAME || 'localhost'
 const SERVICE_DB_PORT = process.env.SERVICE_DB_PORT || 27017
 const SERVICE_DB_NAME = process.env.SERVICE_DB_NAME || 'bookmanager'

@@ -16,8 +16,8 @@
          <span class="navbar-toggler-icon"></span>
        </button>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+         <ul class="navbar-nav mr-auto">
+           <li class="nav-item active">
             <a class="nav-link" href="search.html">Search</span></a>
           </li>
           <li class="nav-item">
@@ -32,41 +32,27 @@
         </ul>
       </div>
     </nav>
-    <div id="content" class="container" >
-      <table id="history_table" class="table" >
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Search Terms</th>
-            <th scope="col">Number of Results</th>
-            <th scope="col">See Results</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    <br>
-      <table id="search_results" class="table" style="display:none">
-        <thead>
-          <tr>
-            <th scope="col">Year</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Avg Rating</th>
-            <th scope="col">Cover</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      
-    </div>
+    <div id="content" class="container">
+        <form id="login">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <form id="logout">
+          <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+      </div>
 
     </div>
     <script src="/vendor/jquery/jquery-3.5.1.slim.min.js" ></script>
     <script src="/vendor/bootstrap-4.5.0-dist/js/bootstrap.min.js" ></script>
     <script src="/vendor/axios/axios.min.js" ></script>
-    <script src="/vendor/moment/moment.min.js" ></script>
     <script src="js/main.js"> </script>
   </body>
 </html>

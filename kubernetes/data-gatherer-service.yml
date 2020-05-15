@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  bookmanager-data-gatherer
+  labels:
+    name: bookmanager-data-gatherer
+spec:
+  selector:
+    name: bookmanager-data-gatherer
+  type:  NodePort
+  ports:
+  - port:  10004
+    targetPort:  10004
