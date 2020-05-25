@@ -1,0 +1,33 @@
+#!/bin/bash
+
+VERSION="1.0.1"
+
+FRONTEND_IMAGE="bookmanager_frontend:$VERSION"
+SERVICE_IMAGE_AUTHENTICATION="bookmanager_authentication_service:$VERSION"
+SERVICE_IMAGE_DATA_GATHERER="bookmanager_data_gatherer_service:$VERSION"
+SERVICE_IMAGE_HISTORY="bookmanager_history_service:$VERSION"
+SERVICE_IMAGE_SEARCH="bookmanager_search_service:$VERSION"
+SERVICE_IMAGE_STATISTICS="bookmanager_statistics_service:$VERSION"
+SERVICE_IMAGE_TRACKING="bookmanager_tracking_service:$VERSION"
+
+GCP_PROJECT_ID="meicm-cc"
+
+echo "Pushing images to GCP Container Registry"
+
+echo "Pushing Frontend"
+docker tag $FRONTEND_IMAGE "gcr.io/$GCP_PROJECT_ID/$FRONTEND_IMAGE"
+docker push "gcr.io/$GCP_PROJECT_ID/$FRONTEND_IMAGE"
+
+echo "Pushing Services"
+docker tag $SERVICE_IMAGE_AUTHENTICATION "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_AUTHENTICATION"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_AUTHENTICATION"
+docker tag $SERVICE_IMAGE_DATA_GATHERER "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_DATA_GATHERER"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_DATA_GATHERER"
+docker tag $SERVICE_IMAGE_HISTORY "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_HISTORY"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_HISTORY"
+docker tag $SERVICE_IMAGE_SEARCH "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_SEARCH"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_SEARCH"
+docker tag $SERVICE_IMAGE_STATISTICS "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_STATISTICS"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_STATISTICS"
+docker tag $SERVICE_IMAGE_TRACKING "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_TRACKING"
+docker push "gcr.io/$GCP_PROJECT_ID/$SERVICE_IMAGE_TRACKING"
