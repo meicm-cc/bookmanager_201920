@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-authentication
+  labels:
+    project: meicm-bm
+    name: bookmanager-authentication
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-authentication
+  template:
+    metadata:
+      labels:
+        project: meicm-bm
+        name: bookmanager-authentication
+    spec:
+      containers:
+      - name: bookmanager-authentication
+        env:
+        - name: SERVICE_DB_HOSTNAME
+          value: bookmanager-database
+        - name: SERVICE_DB_NAME
+          value: bookmanager
+        - name: SERVICE_DB_PORT
+          value: "27017"
+        - name: SERVICE_PORT
+          value: "10002"
+        ports:
+        - containerPort: 10002
+        image: gcr.io/meicm-cc/bookmanager_authentication_service:1.0.1
+        imagePullPolicy: IfNotPresent
+        resources: {}
+      restartPolicy: Always
