@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-statistics
+  labels:
+    project: meicm-bm
+    name: bookmanager-statistics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-statistics
+  template:
+    metadata:
+      labels:
+        project: meicm-bm
+        name: bookmanager-statistics
+    spec:
+      containers:
+      - name: bookmanager-statistics
+        env:
+        - name: SERVICE_DB_HOSTNAME
+          value: bookmanager-database
+        - name: SERVICE_DB_NAME
+          value: bookmanager
+        - name: SERVICE_DB_PORT
+          value: "27017"
+        - name: SERVICE_PORT
+          value: "10005"
+        ports:
+        - containerPort: 10005
+        image: gcr.io/meicm-cc/bookmanager_statistics_service:1.0.4
+        imagePullPolicy: IfNotPresent
+        resources: {}
+      restartPolicy: Always
+      

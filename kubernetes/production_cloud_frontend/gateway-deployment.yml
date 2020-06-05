@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-gateway
+  labels:
+    name: bookmanager-gateway
+    project: meicm-bm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-gateway
+  template:
+    metadata:
+      labels:
+        name: bookmanager-gateway
+        project: meicm-bm
+    spec:
+      containers:
+      - image: gcr.io/meicm-cc/bookmanager_gateway_service:1.0.4
+        name: bookmanager-gateway
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        ports:
+        - containerPort: 80
+      restartPolicy: Always

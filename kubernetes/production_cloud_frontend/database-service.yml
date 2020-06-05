@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookmanager-database
+  labels:
+    name: bookmanager-database
+spec:
+  selector:
+    name: bookmanager-database
+  type:  ClusterIP
+  ports:
+  - port:  27017
+    targetPort:  27017

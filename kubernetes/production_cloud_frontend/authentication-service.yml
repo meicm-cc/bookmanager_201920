@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  bookmanager-authentication
+  labels:
+    name: bookmanager-authentication
+spec:
+  selector:
+    name: bookmanager-authentication
+  type:  NodePort
+  ports:
+  - port:  10002
+    targetPort:  10002

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-tracking
+  labels:
+    project: meicm-bm
+    name: bookmanager-tracking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-tracking
+  template:
+    metadata:
+      labels:
+        project: meicm-bm
+        name: bookmanager-tracking
+    spec:
+      containers:
+      - name: bookmanager-tracking
+        env:
+        - name: SERVICE_DB_HOSTNAME
+          value: bookmanager-database
+        - name: SERVICE_DB_NAME
+          value: bookmanager
+        - name: SERVICE_DB_PORT
+          value: "27017"
+        - name: SERVICE_PORT
+          value: "10003"
+        ports:
+        - containerPort: 10003
+        image: gcr.io/meicm-cc/bookmanager_tracking_service:1.0.4
+        imagePullPolicy: IfNotPresent
+        resources: {}
+      restartPolicy: Always
+      
