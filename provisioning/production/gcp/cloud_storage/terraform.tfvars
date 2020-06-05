@@ -1,0 +1,5 @@
+project_id = "meicm-cc"
+region = "europe-west1"
+location = "europe-west1"
+bucket = "bookmananger-meicm-frontend"
+frontend_folder = "../../../../src/frontend"
