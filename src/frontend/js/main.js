@@ -1,8 +1,8 @@
-const historyServiceURL = ''
-const searchServiceURL = ''
-const authenticationServiceURL = ''
-const trackingServiceURL = ''
-const statisticsServiceURL = ''
+var historyServiceURL = 'http://api.bookmanager.meicm'
+var searchServiceURL = 'http://api.bookmanager.meicm'
+var authenticationServiceURL = 'http://api.bookmanager.meicm'
+var trackingServiceURL = 'http://api.bookmanager.meicm'
+var statisticsServiceURL = 'http://api.bookmanager.meicm'
 
 const insertSearchResult = (book,table) => {
   let row = document.createElement('tr');
