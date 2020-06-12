@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmanager-history
+  labels:
+    project: meicm-bm
+    name: bookmanager-history
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: bookmanager-history
+  template:
+    metadata:
+      labels:
+        project: meicm-bm
+        name: bookmanager-history
+    spec:
+      containers:
+      - name: bookmanager-history
+        env:
+        - name: GR_KEY
+          value: 5rdbqi8sOiUoyOpofYvxLA
+        - name: SERVICE_DB_HOSTNAME
+          value: bookmanager-database
+        - name: SERVICE_DB_NAME
+          value: bookmanager
+        - name: SERVICE_DB_PORT
+          value: "27017"
+        - name: SERVICE_PORT
+          value: "10000"
+        ports:
+        - containerPort: 10000
+        image: 228513434769.dkr.ecr.eu-west-1.amazonaws.com/meicm_bookmanager:bookmanager_history_service_1.0.4
+        imagePullPolicy: IfNotPresent
+        resources: {}
+      restartPolicy: Always
